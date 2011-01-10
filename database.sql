@@ -55,4 +55,3 @@ CREATE TABLE IF NOT EXISTS `sw_categories` (
 
 INSERT INTO `sw_categories` (`id`, `name`, `description`, `created_time`) VALUES
 (1, 'Uncategorized', 'Uncategorized', 1294585518);
-
