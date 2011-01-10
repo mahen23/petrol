@@ -93,6 +93,45 @@ class Controller_Articles extends Controller_Template {
         $this->template->content = View::factory('articles/edit', $data);
     }
     
+	
+	
+	 public function action_view($id)
+    {
+        $article = Model_Article::find($id);  
+        $data['article'] = $article;
+		$this->template->content = View::factory('articles/view', $data);
+    
+    }
+	
+	public function action_admin()
+	{
+		 $total_articles = count(Model_Article::find('all'));
+        
+        Pagination::set_config(array(
+            'pagination_url' => 'articles/index',
+            'per_page' => 5,
+            'total_items' => $total_articles,
+            'num_links' => 3,
+        ));
+        
+        $articles = Model_Article::find('all', array(
+            'offset' => Pagination::$offset,
+            'limit' => Pagination::$per_page,
+            'include' => 'category',
+        ));
+        
+        $this->template->title = 'Articles';
+        $this->template->content = View::factory('articles/admin', array(
+            'total_articles' => $total_articles,
+            'articles' => $articles,
+        ));
+	
+	
+
+	}
+	
+	
+	
     
     public function action_delete($id)
     {

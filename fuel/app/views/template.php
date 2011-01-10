@@ -12,7 +12,8 @@
         
         <div class="header">
             <div class="menubar">
-                <div class="menu_item"><?php echo Html::anchor('articles/index', 'All Articles'); ?></div>
+                <div class="menu_item"><?php echo Html::anchor('articles/admin', 'Admin'); ?></div>
+                <div class="menu_item"><?php echo Html::anchor('articles/index', 'All articles'); ?></div>
                 <div class="menu_item"><?php echo Html::anchor('articles/add', 'Add Article'); ?></div>
                 <div class="menu_item"><?php echo Html::anchor('categories/index', 'All Categories'); ?></div>
                 <div class="menu_item"><?php echo Html::anchor('categories/add', 'Add Category'); ?></div>
@@ -27,7 +28,7 @@
         </div>
         
         <div class="footer">
-            <div class="top">Page renedered in {exec_time}s | Memory Usage {mem_usage}MB</div>
+            <div class="top">Page rendered in {exec_time}s | Memory Usage {mem_usage}MB</div>
             <div class="bottom">Developed by <a href="http://twitter.com/abdel_m">Abdelrahman Mahmoud</a> 
                 and <a href="http://twitter.com/Alfie_Rivera">Alfredo Rivera</a>.</div>
         </div>
