@@ -6,7 +6,6 @@
 <div class="input select">
     <?php echo Form::label('Category', 'category_id'); ?>
     <select name="category_id">
-        <option value="0" selected>Uncategorized</option>
         <?php foreach ($categories as $category): ?>
         <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
         <?php endforeach; ?>
