@@ -18,7 +18,8 @@ class Controller_Articles extends Controller_Template {
             'limit' => Pagination::$per_page,
             'include' => 'category',
         ));
-        
+        $data['categories'] = Model_Category::find('all');
+		
         $this->template->title = 'Articles';
         $this->template->content = View::factory('articles/index', array(
             'total_articles' => $total_articles,
