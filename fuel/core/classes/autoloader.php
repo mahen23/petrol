@@ -303,7 +303,7 @@ class Autoloader {
 		}
 		elseif ( ! $namespaced and $class_name = static::is_core_class($class))
 		{
-			include str_replace('/', DS, static::$classes[$class_name]);
+			! class_exists($class_name, false) and include str_replace('/', DS, static::$classes[$class_name]);
 			static::alias_to_namespace($class_name);
 			static::_init_class($class);
 			return true;
@@ -349,6 +349,13 @@ class Autoloader {
 				}
 			}
 		}
+
+		// Prevent failed load from keeping other classes from initializing
+		if (static::$auto_initialize == $class)
+		{
+			static::$auto_initialize = null;
+		}
+
 		return false;
 	}
 
@@ -362,12 +369,12 @@ class Autoloader {
 	{
 		if (static::$auto_initialize === $class)
 		{
+			static::$auto_initialize = null;
 			if (is_callable($class.'::_init'))
 			{
 				call_user_func($class.'::_init');
 			}
 		}
-		static::$auto_initialize = null;
 	}
 }
 

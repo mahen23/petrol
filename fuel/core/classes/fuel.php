@@ -37,7 +37,7 @@ class Fuel {
 	const L_INFO = 3;
 	const L_ALL = 4;
 
-	const VERSION = '1.0.0-beta1';
+	const VERSION = '1.0.0-dev';
 
 	public static $initialized = false;
 
@@ -214,7 +214,7 @@ class Fuel {
 
 		$paths = static::$_paths;
 		// get the paths of the active request, and search them first
-		if ($active = \Request::active())
+		if (class_exists('Request', false) and $active = \Request::active())
 		{
 			$paths = array_merge($active->paths, $paths);
 		}

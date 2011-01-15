@@ -54,11 +54,6 @@ a:link, a:visited {
 	padding: 0;
 }
 
-
-.link a:hover {
-text-decoration: none;
-}
-
 a:hover {
 	text-decoration: underline;
 }

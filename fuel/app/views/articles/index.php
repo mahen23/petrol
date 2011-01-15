@@ -17,9 +17,7 @@
 		<tr>        
 			<td class="row1" width="12%"><?php echo 'Created on: ' . Date::Factory($article->created_time)->format("%m/%d/%Y"); ?></td>    
 		</tr>
-		<tr>        
-			<td class="row1" width="12%"><?php echo 'Filed under: ' . print_r($categories); ?></td>    
-		</tr>
+		
 	</table><br /><br />
 <?php endforeach; ?>
 

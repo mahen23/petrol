@@ -6,10 +6,9 @@
     </head>
     <body>
         <div class="logo">
-            <h1><a class="link" href="#">PETROL</a>
+            <h1><a class="link" href="index">PETROL</a>
                 <sub class="fork"><a href="https://github.com/mahen23/petrol">Fork on Github</a></sub></h1>
         </div>
-        
         <div class="header">
             <div class="menubar">
                 <div class="menu_item"><?php echo Html::anchor('articles/admin', 'Admin'); ?></div>

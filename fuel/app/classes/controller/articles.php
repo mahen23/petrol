@@ -1,12 +1,13 @@
 <?php
 
 class Controller_Articles extends Controller_Template {
-
+	
     public function action_index()
     {   
         $total_articles = count(Model_Article::find('all'));
         
-        Pagination::set_config(array(
+        $this->template = View::factory('front');
+		Pagination::set_config(array(
             'pagination_url' => 'articles/index',
             'per_page' => 5,
             'total_items' => $total_articles,
@@ -18,8 +19,7 @@ class Controller_Articles extends Controller_Template {
             'limit' => Pagination::$per_page,
             'include' => 'category',
         ));
-        $data['categories'] = Model_Category::find('all');
-		
+        
         $this->template->title = 'Articles';
         $this->template->content = View::factory('articles/index', array(
             'total_articles' => $total_articles,
@@ -38,9 +38,9 @@ class Controller_Articles extends Controller_Template {
             if ( $add_article->run() == TRUE )
             {
                 $article = new Model_Article(array(
-                    'category_id' => Input::post('category_id'),
-                    'title' => Input::post('title'),
-                    'body' => Input::post('body'),
+                    'category_id' => $add_article->validated('category_id'),
+                    'title' => $add_article->validated('title'),
+                    'body' => $add_article->validated('body'),
                     'created_time' => time(),
                 ));
 
@@ -73,9 +73,9 @@ class Controller_Articles extends Controller_Template {
             
             if ( $edit_article->run() == TRUE )
             {
-                $article->category_id = Input::post('category_id');
-                $article->title = Input::post('title');
-                $article->body = Input::post('body');
+                $article->category_id = $edit_article->validated('category_id');
+                $article->title = $edit_article->validated('title');
+                $article->body = $edit_article->validated('body');
                 $article->save();
 
                 Session::set_flash('message', 'Article successfully updated.');
@@ -93,19 +93,24 @@ class Controller_Articles extends Controller_Template {
         $this->template->title = 'Edit Article - '.$article->title;
         $this->template->content = View::factory('articles/edit', $data);
     }
-    
+	
+	
 	
 	
 	 public function action_view($id)
     {
+		 $this->template = View::factory('front');
         $article = Model_Article::find($id);  
         $data['article'] = $article;
 		$this->template->content = View::factory('articles/view', $data);
     
     }
 	
-	public function action_admin()
+	
+    
+    public function action_admin()
 	{
+		$this->template = View::factory('template');
 		 $total_articles = count(Model_Article::find('all'));
         
         Pagination::set_config(array(
@@ -133,7 +138,7 @@ class Controller_Articles extends Controller_Template {
 	
 	
 	
-    
+	
     public function action_delete($id)
     {
         Model_Article::find($id)->delete();
